@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import 'package:qr_scanner/pages/direcciones_page.dart';
 import 'package:qr_scanner/pages/mapas_page.dart';
+
+import 'package:qr_scanner/providers/db_provider.dart';
 import 'package:qr_scanner/providers/ui_provider.dart';
 
 import '../widgets/custom_navigationbar.dart';
@@ -34,6 +36,8 @@ class _HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
     final currentIndex = uiProvider.selectdMenuopt;
+
+    DBProvider.db.database;
 
     switch (currentIndex) {
       case 0:
