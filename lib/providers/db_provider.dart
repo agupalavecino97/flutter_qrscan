@@ -24,7 +24,6 @@ class DBProvider {
   Future<Database> initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentsDirectory.path, 'Scans2DB.db');
-    print(path);
 
     return await openDatabase(
       path,
@@ -65,7 +64,6 @@ class DBProvider {
   Future<ScanModel?> getScanById(int id) async {
     final db = await database;
     final res = await db!.query('Scans2', where: 'id = ?', whereArgs: [id]);
-    print(res);
     return res.isNotEmpty ? ScanModel.fromJson(res.first) : null;
   }
 
@@ -80,7 +78,6 @@ class DBProvider {
     final res = await db!.rawQuery('''
       SELECT * FROM Scans2 WHERE tipo = '$tipo'
     ''');
-    print(res);
     return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
   }
 
@@ -93,7 +90,7 @@ class DBProvider {
 
   Future<int> deleteScan(int id) async {
     final db = await database;
-    final res = await db!.delete('Scan', where: 'id = ?', whereArgs: [id]);
+    final res = await db!.delete('Scans2', where: 'id = ?', whereArgs: [id]);
     return res;
   }
 
