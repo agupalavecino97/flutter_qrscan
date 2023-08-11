@@ -42,10 +42,10 @@ class _HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
     final currentIndex = uiProvider.selectdMenuopt;
-    // DBProvider.db.database;
+    DBProvider.db.database;
     // final tempScan = ScanModel(valor: 'http://udemi.com');
     // DBProvider.db.nuevoScan(tempScan).then((scan) => print(scan));
-    DBProvider.db.getScans().then((scan) => print(scan));
+    // DBProvider.db.getScans().then((scan) => print(scan));
 
     final scanListProvider =
         Provider.of<ScanListProvider>(context, listen: false);

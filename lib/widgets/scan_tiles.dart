@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/scan_list_provider.dart';
+import '../utils/utils.dart';
 
 class ScanTiles extends StatelessWidget {
   final String tipo;
@@ -25,9 +26,7 @@ class ScanTiles extends StatelessWidget {
               key: UniqueKey(),
               child: ListTile(
                 leading: Icon(
-                  this.tipo == 'http'
-                      ? Icons.home_outlined
-                      : Icons.map_outlined,
+                  tipo == 'http' ? Icons.home_outlined : Icons.map_outlined,
                   color: Theme.of(context).primaryColor,
                 ),
                 title: Text(scans[i].valor),
@@ -36,7 +35,7 @@ class ScanTiles extends StatelessWidget {
                   Icons.keyboard_arrow_right,
                   color: Colors.grey,
                 ),
-                onTap: () => () {},
+                onTap: () => launchInBrowser(context, scans[i]),
               ),
             ));
   }
