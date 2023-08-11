@@ -5,6 +5,7 @@ import 'package:qr_scanner/pages/direcciones_page.dart';
 import 'package:qr_scanner/pages/mapas_page.dart';
 
 import 'package:qr_scanner/providers/db_provider.dart';
+import 'package:qr_scanner/providers/scan_list_provider.dart';
 import 'package:qr_scanner/providers/ui_provider.dart';
 
 import '../widgets/custom_navigationbar.dart';
@@ -37,16 +38,22 @@ class _HomePageBody extends StatelessWidget {
     final uiProvider = Provider.of<UiProvider>(context);
     final currentIndex = uiProvider.selectdMenuopt;
     // DBProvider.db.database;
-    // final tempScan = ScanModel(valor: 'http://google.com');
+    // final tempScan = ScanModel(valor: 'http://udemi.com');
     // DBProvider.db.nuevoScan(tempScan).then((scan) => print(scan));
-    // DBProvider.db.getScanById(1).then((scan) => print(scan));
+    // DBProvider.db.getScans().then((scan) => print(scan));
+
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
 
     switch (currentIndex) {
       case 0:
+        scanListProvider.cargarScansTipo('geo');
         return const MapasPage();
       case 1:
+        scanListProvider.cargarScansTipo('http');
         return const DireccionesPage();
       default:
+        scanListProvider.cargarScansTipo('geo');
         return const MapasPage();
     }
   }

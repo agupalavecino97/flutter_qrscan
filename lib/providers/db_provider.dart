@@ -71,14 +71,14 @@ class DBProvider {
 
   Future<List<ScanModel>?> getScans() async {
     final db = await database;
-    final res = await db!.query('Scans');
+    final res = await db!.query('Scans2');
     return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
   }
 
-  Future<List<ScanModel>?> getScanByType(int tipo) async {
+  Future<List<ScanModel>?> getScanByType(String tipo) async {
     final db = await database;
     final res = await db!.rawQuery('''
-      SELECT * FROM Scans WHERE tipo = '$tipo'
+      SELECT * FROM Scans2 WHERE tipo = '$tipo'
     ''');
     print(res);
     return res.isNotEmpty ? res.map((e) => ScanModel.fromJson(e)).toList() : [];
@@ -86,7 +86,7 @@ class DBProvider {
 
   Future<int> updateScan(ScanModel update) async {
     final db = await database;
-    final res = await db!.update('Scans', update.toJson(),
+    final res = await db!.update('Scans2', update.toJson(),
         where: 'id = ?', whereArgs: [update.id]);
     return res;
   }
@@ -100,7 +100,7 @@ class DBProvider {
   Future<int> deleteAllScans() async {
     final db = await database;
     final res = await db!.rawDelete(''' 
-      DELETE FROM Scans
+      DELETE FROM Scans2
     ''');
     return res;
   }
